@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove these
+        //Need to remove these
         SharedPreferences.Editor editor = getSharedPreferences("sharedpref", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
