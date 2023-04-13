@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".eventdetails.VenueFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/venue_card1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="#040404"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp">
+
+            <TextView
+                android:id="@+id/venueNameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textAppearance="@style/BoldText"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/venueNameValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/venueContactInfoTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="TextView | TextView | TextView | TextView | TextView |"
+                android:textColor="@color/green"
+                android:textAppearance="@style/BoldText"
+                android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/venueAddressTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/venueNameTitle"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/BoldText"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/venueAddressValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/venueContactInfoTitle"
+                    android:layout_below="@+id/venueNameValue"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:text="TextView | TextView | TextView | TextView | TextView |"
+                    android:textColor="@color/green"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/BoldText"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/venueCityStateTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City/State"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/venueAddressTitle"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/BoldText"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/venueCityStateValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/venueContactInfoTitle"
+                    android:layout_below="@+id/venueAddressValue"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:text="TextView | TextView | TextView | TextView | TextView |"
+                    android:textColor="@color/green"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/BoldText"
+                    android:textSize="15dp"/>
+
+
+                <TextView
+                    android:id="@+id/venueContactInfoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Info"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/venueCityStateTitle"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/BoldText"
+                    android:textSize="15dp"
+                    android:paddingEnd="20dp"/>
+
+                <TextView
+                    android:id="@+id/venueContactInfoValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/venueContactInfoTitle"
+                    android:layout_below="@+id/venueCityStateValue"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:text="TextView | TextView | TextView | TextView | TextView |"
+                    android:textColor="@color/green"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/BoldText"
+                    android:textSize="15dp"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="320dp"
+                android:layout_height="200dp"
+                app:cardCornerRadius="16dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/venueContactInfoTitle">
+
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/venueContactInfoTitle"
+                    />
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/venue_card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="#ffe79d"
+        app:cardCornerRadius="25dp"
+        android:layout_below="@+id/venue_card1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp">
+
+        <TextView
+            android:id="@+id/openHoursTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open Hours"
+            android:textColor="@color/black"
+            android:textAppearance="@style/BoldText"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/openHoursValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/openHoursTitle"
+            android:ellipsize="end"
+            android:clickable="true"
+            android:focusable="true"
+            android:lines="3"/>
+
+            <TextView
+                android:id="@+id/generalRulesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="General Rules"
+                android:textColor="@color/black"
+                android:textAppearance="@style/BoldText"
+                android:layout_below="@+id/openHoursValue"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/generalRulesValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/generalRulesTitle"
+                android:ellipsize="end"
+                android:clickable="true"
+                android:focusable="true"
+                android:lines="3"/>
+
+
+            <TextView
+                android:id="@+id/childRulesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Child Rules"
+                android:textColor="@color/black"
+                android:textAppearance="@style/BoldText"
+                android:layout_below="@+id/generalRulesValue"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/childRulesValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/childRulesTitle"
+                android:ellipsize="end"
+                android:clickable="true"
+                android:focusable="true"
+                android:lines="3"
+                android:layout_marginBottom="20dp"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+</FrameLayout>
+</ScrollView>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".eventdetails.DetailsFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/details_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="#040404"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:id="@+id/artistTeamsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Artist/Teams"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/artistTeamsValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="TextView | TextView | TextView | TextView | TextView |"
+                android:textColor="@color/green"/>
+
+            <TextView
+                android:id="@+id/venueTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Venue"
+                android:textColor="@color/white"
+                android:layout_below="@+id/artistTeamsTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/venueValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="Levi's stadium"
+                android:textColor="@color/green"
+                android:layout_below="@+id/artistTeamsTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/dateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="@color/white"
+                android:layout_below="@+id/venueTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/dateValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="Sep 16, 2023"
+                android:textColor="@color/green"
+                android:layout_below="@+id/venueTitle"
+                android:layout_marginTop="20dp"/>
+
+
+
+            <TextView
+                android:id="@+id/timeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textColor="@color/white"
+                android:layout_below="@+id/dateTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/timeValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="6:00 PM"
+                android:textColor="@color/green"
+                android:layout_below="@+id/dateTitle"
+                android:layout_marginTop="20dp"/>
+
+
+
+            <TextView
+                android:id="@+id/genresTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Genres"
+                android:textColor="@color/white"
+                android:layout_below="@+id/timeTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/genresValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="Music | Pop | Pop"
+                android:textColor="@color/green"
+                android:layout_below="@+id/timeTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/priceRangeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price Range"
+                android:textColor="@color/white"
+                android:layout_below="@+id/genresTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/priceRangeValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="49 - 159 (USD)"
+                android:textColor="@color/green"
+                android:layout_below="@+id/genresTitle"
+                android:layout_marginTop="20dp"/>
+
+
+            <TextView
+                android:id="@+id/ticketStatusTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ticket Status"
+                android:textColor="@color/white"
+                android:layout_below="@+id/priceRangeTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/ticketStatusValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/priceRangeTitle"
+                android:layout_marginStart="120dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="On Sale"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/buyTicketsAtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy Tickets At"
+                android:textColor="@color/white"
+                android:layout_below="@+id/ticketStatusTitle"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/buyTicketsAtValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/artistTeamsTitle"
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:text="https://www.google.com/search?q=how+to+show+loader+betwen+active+and+fragment"
+                android:textColor="@color/green"
+                android:layout_below="@+id/ticketStatusTitle"
+                android:layout_marginTop="20dp"/>
+<!--            android:autoLink="web"-->
+
+
+
+            <ImageView
+                android:id="@+id/search_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/buyTicketsAtTitle"
+                android:src="@drawable/test_img"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>

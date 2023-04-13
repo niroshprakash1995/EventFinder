@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="customToast">
+        <item name="stColorBackground">#c1c3cc</item>
+        <item name="stRadius">4dp</item>
+    </style>
+
+    <style name="BoldText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>
