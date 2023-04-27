@@ -2,11 +2,13 @@ package com.web.eventfinder;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -165,10 +168,24 @@ public class EventDetailsActivity extends AppCompatActivity {
                 if(eventWasInFavorites){
                     //Change icon to empty heart
                     heartIcon.setImageResource(R.drawable.fav);
+                    Snackbar snackbar = Snackbar.make(v, toolbarTitle.getText() + " removed from favorites", Snackbar.LENGTH_SHORT);
+                    View snackBarView= snackbar.getView();
+                    snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.snackBar_grey)));
+                    TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    textView.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.black));
+                    snackbar.show();
+
                 }
                 else{
                     jsonArray.put(jsonObjVal);
                     heartIcon.setImageResource(R.drawable.fav_filled);
+                    Snackbar snackbar = Snackbar.make(v, toolbarTitle.getText() + " added to favorites", Snackbar.LENGTH_SHORT);
+                    View snackBarView= snackbar.getView();
+                    snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.snackBar_grey)));
+                    TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    textView.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.black));
+                    snackbar.show();
+
                 }
                 sharedPreferences = getSharedPreferences("sharedpref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();

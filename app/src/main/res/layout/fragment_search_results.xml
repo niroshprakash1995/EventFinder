@@ -52,5 +52,6 @@
         android:text="No events found"
         android:textColor="#24A501"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:visibility="visible" />
 </LinearLayout>

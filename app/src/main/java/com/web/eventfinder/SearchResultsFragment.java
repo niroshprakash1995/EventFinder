@@ -2,6 +2,7 @@ package com.web.eventfinder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +14,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -86,6 +89,12 @@ public class SearchResultsFragment extends Fragment {
                         ImageView imageView = itemView.findViewById(R.id.favorite_icon);
                         if(searchIds.contains(id)){
                             imageView.setImageResource(R.drawable.fav_filled);
+                            Snackbar snackbar = Snackbar.make(rootView, " added to favorites", Snackbar.LENGTH_SHORT);
+                            View snackBarView= snackbar.getView();
+                            snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.snackBar_grey)));
+                            TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                            textView.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+                            snackbar.show();
                         }
                         else{
                             imageView.setImageResource(R.drawable.fav);

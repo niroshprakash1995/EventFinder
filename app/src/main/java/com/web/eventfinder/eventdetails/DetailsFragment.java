@@ -1,5 +1,8 @@
 package com.web.eventfinder.eventdetails;
 
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -72,7 +75,16 @@ public class DetailsFragment extends Fragment {
 
         TextView buyTicketsAtValue = view.findViewById(R.id.buyTicketsAtValue);
         buyTicketsAtValue.setText(detailsItem.getBuyTicketLink());
+        buyTicketsAtValue.setClickable(true);
         buyTicketsAtValue.setSelected(true);
+        buyTicketsAtValue.setPaintFlags(buyTicketsAtValue.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        buyTicketsAtValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(detailsItem.getBuyTicketLink()));
+                startActivity(browserIntent);
+            }
+        });
 
         ImageView search_image = view.findViewById(R.id.search_image);
         Picasso.get().load(detailsItem.getSeatMapLink()).fit().into(search_image);

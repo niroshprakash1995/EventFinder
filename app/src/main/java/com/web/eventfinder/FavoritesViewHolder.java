@@ -3,14 +3,17 @@ package com.web.eventfinder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.web.eventfinder.adapters.FavoritesAdapter;
 
 import org.json.JSONArray;
@@ -48,6 +51,13 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder{
 
                 FavoritesAdapter adapter = (FavoritesAdapter) ((RecyclerView) itemView.getParent()).getAdapter();
                 RecyclerView recyclerView = (RecyclerView) itemView.getParent();
+
+                Snackbar snackbar = Snackbar.make(v,search_name1.getText() + " removed from favorites", Snackbar.LENGTH_SHORT);
+                View snackBarView= snackbar.getView();
+                snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.snackBar_grey)));
+                TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                textView.setTextColor(ContextCompat.getColor(context, R.color.black));
+                snackbar.show();
 
                 // Remove the current item from the adapter
                 adapter.removeItem(removedItemPosition);

@@ -16,7 +16,7 @@
         android:layout_width="356dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
         android:visibility="visible"
         app:cardBackgroundColor="#040404"
@@ -43,22 +43,38 @@
                 android:textSize="20sp"
                 android:visibility="visible" />
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView_keyword"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/green"
-                android:completionThreshold="2"
-                android:hint="Enter the Keyword"
-                android:popupBackground="@android:color/black"
-                android:textColor="@color/white"
-                android:textColorHighlight="#24A501"
-                android:textColorHint="#7D837C"
-                android:textColorLink="@color/white"
-                android:text="P!nk"
-                />
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView_keyword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/green"
+                    android:completionThreshold="2"
+                    android:hint="Enter the Keyword"
+                    android:popupBackground="@android:color/black"
+                    android:textColor="@color/white"
+                    android:textColorHighlight="#24A501"
+                    android:textColorHint="#7D837C"
+                    android:textColorLink="@color/white"
+                    android:text="P!nk" />
+
+                <ProgressBar
+                    android:id="@+id/progressLoading"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/autoCompleteTextView_keyword"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
 
             <TextView
                 android:id="@+id/textView_distance"
@@ -161,7 +177,8 @@
                 android:textColorHint="#FF7D837C"
                 android:textColorLink="#24A501"
                 android:textSize="20sp"
-                android:text="Los Angeles"/>
+                android:text="Los Angeles"
+                android:theme="@style/Theme.EventFinder"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

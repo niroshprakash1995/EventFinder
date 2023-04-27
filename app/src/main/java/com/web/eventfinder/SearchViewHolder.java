@@ -3,13 +3,16 @@ package com.web.eventfinder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
@@ -66,6 +69,13 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
                 if(eventInFavorites){
                     //Change icon to empty heart
                     favorite_icon.setImageResource(R.drawable.fav);
+
+                    Snackbar snackbar = Snackbar.make(v, search_name.getText() + " added to favorites", Snackbar.LENGTH_SHORT);
+                    View snackBarView= snackbar.getView();
+                    snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.snackBar_grey)));
+                    TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    textView.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    snackbar.show();
                 }
                 else{
                     JSONObject jsonObject = new JSONObject();
@@ -83,6 +93,12 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
                     jsonArray.put(jsonObject);
                     //Change icon to full heart
                     favorite_icon.setImageResource(R.drawable.fav_filled);
+                    Snackbar snackbar = Snackbar.make(v, search_name.getText() + " removed from favorites", Snackbar.LENGTH_SHORT);
+                    View snackBarView= snackbar.getView();
+                    snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.snackBar_grey)));
+                    TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    textView.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    snackbar.show();
                 }
                 sharedPreferences = context.getSharedPreferences("sharedpref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
@@ -121,21 +137,21 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void checkIfFavorite(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("sharedpref", Context.MODE_PRIVATE);
-        String fav_items = sharedPreferences.getString("jsondata", "[]");
-        JSONArray jsonArray;
-        try {
-            jsonArray = new JSONArray(fav_items);
-            for(int i = 0; i< jsonArray.length(); i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if(jsonObject.has("eventID") && jsonObject.get("eventID").equals(eventId)){
-                    favorite_icon.setImageResource(R.drawable.fav_filled);
-                    break;
-                }
-            }
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public void checkIfFavorite(Context context) {
+//        SharedPreferences sharedPreferences = context.getSharedPreferences("sharedpref", Context.MODE_PRIVATE);
+//        String fav_items = sharedPreferences.getString("jsondata", "[]");
+//        JSONArray jsonArray;
+//        try {
+//            jsonArray = new JSONArray(fav_items);
+//            for(int i = 0; i< jsonArray.length(); i++){
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                if(jsonObject.has("eventID") && jsonObject.get("eventID").equals(eventId)){
+//                    favorite_icon.setImageResource(R.drawable.fav_filled);
+//                    break;
+//                }
+//            }
+//        } catch (JSONException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

@@ -36,8 +36,6 @@ import org.json.JSONObject;
 
 public class VenueFragment extends Fragment {
 
-    private String mParam1;
-    private String mParam2;
     private VenueItem venueItem;
     private double lat;
     private double lon;
@@ -56,12 +54,9 @@ public class VenueFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_venue, container, false);
         populateVenueDetails(view);
 
-        //To expand/shrink text
-        //Used Chat GPT
         TextView openHoursValue = view.findViewById(R.id.openHoursValue);
         openHoursValue.setOnClickListener(new View.OnClickListener() {
             boolean isExpanded = false;
@@ -152,14 +147,11 @@ public class VenueFragment extends Fragment {
 
         TextView openHours = view.findViewById(R.id.openHoursValue);
         openHours.setText(venueItem.getOpenHoursDetail());
-        //openHours.setSelected(true);
 
         TextView generalRules = view.findViewById(R.id.generalRulesValue);
         generalRules.setText(venueItem.getGeneralRule());
-        //generalRules.setSelected(true);
 
         TextView childRules = view.findViewById(R.id.childRulesValue);
         childRules.setText(venueItem.getChildRule());
-        //childRules.setSelected(true);
     }
 }

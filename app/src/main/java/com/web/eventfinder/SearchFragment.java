@@ -29,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -114,6 +116,7 @@ public class SearchFragment extends Fragment {
 
         adapter = new ArrayAdapter < String > (getContext(), R.layout.dropdown_layout, new ArrayList < String > ());
         autoCompleteTextView_keyword.setAdapter(adapter);
+        final ProgressBar autoCompleteProgressBar = view.findViewById(R.id.progressLoading);
 
         autoCompleteTextView_keyword.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,7 +127,9 @@ public class SearchFragment extends Fragment {
         });
         autoCompleteTextView_keyword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -133,7 +138,12 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                getKeywordSuggestions(autoCompleteTextView_keyword.getText().toString());
+                autoCompleteProgressBar.setVisibility(View.VISIBLE);
+                if(autoCompleteTextView_keyword.getText().toString().length() == 0){
+                    autoCompleteProgressBar.setVisibility(View.GONE);
+                }
+                getKeywordSuggestions(autoCompleteTextView_keyword.getText().toString(), autoCompleteProgressBar);
+                autoCompleteTextView_keyword.setAdapter(adapter);
             }
         });
 
@@ -161,6 +171,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 if (checked) {
+                    getLatAndLon();
                     locationSwitch.setThumbTintList(ColorStateList.valueOf(getResources().getColor(R.color.green)));
                     locationSwitch.setTrackTintList(ColorStateList.valueOf(getResources().getColor((R.color.green))));
                     locationText.setVisibility(View.GONE);
@@ -279,7 +290,7 @@ public class SearchFragment extends Fragment {
         searchButton = view.findViewById(R.id.search_button);
     }
 
-    public void getKeywordSuggestions(CharSequence s) {
+    public void getKeywordSuggestions(CharSequence s, ProgressBar autoCompleteProgressBar) {
         String keyword = s.toString();
         if (keyword.length() > 0) {
             String url = API_URL_KEYWORD_SEARCH + "?keyword=" + keyword;
@@ -298,7 +309,7 @@ public class SearchFragment extends Fragment {
                                     suggestions.add(suggestion);
                                 }
                                 adapter = new ArrayAdapter < String > (getContext(), R.layout.dropdown_layout, suggestions);
-                                autoCompleteTextView_keyword.setAdapter(adapter);
+                                autoCompleteProgressBar.setVisibility(View.GONE);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -314,30 +325,37 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    private void getLatAndLon() {
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = "https://ipinfo.io/?token=b3a26d7c4db9dc";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject> () {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                            String[] loc;
+                            try {
+                                loc = response.getString("loc").split(",");
+                                Log.d("latitude", loc[0].toString());
+                                Log.d("longitude", loc[1].toString());
+                                latitude = Double.parseDouble(loc[0]);
+                                longitude = Double.parseDouble(loc[1]);
+
+                            } catch (JSONException e) {
+                                Log.d("IP LOG", "Got error");
+                                e.printStackTrace();
+                            }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("getLatAndLon - ERROR OCCURRED --->", error.toString());
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
+
     public void getGeohash(String location, GeohashCallback callback) {
         if (locationSwitch.isChecked()) {
-            //Get android location here
-//            fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
-//            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//                fusedLocationClient.getLastLocation()
-//                        .addOnSuccessListener(new OnSuccessListener < Location > () {
-//                            @Override
-//                            public void onSuccess(Location location) {
-//                                if (location != null) {
-//                                    // Use the retrieved location here
-//                                    double latitude = location.getLatitude();
-//                                    double longitude = location.getLongitude();
-//
-//                                    GeoHash geoHash = GeoHash.withCharacterPrecision(latitude, longitude, 7);
-//                                    geohash = geoHash.toBase32();
-//                                    Log.d("Geohash ---> ", geohash);
-//                                    callback.onSuccess(geohash);
-//
-//                                }
-//                            }
-//                        });
-//            }
-
             GeoHash geoHash = GeoHash.withCharacterPrecision(latitude, longitude, 7);
             geohash = geoHash.toBase32();
             Log.d("Geohash ---> ", geohash);

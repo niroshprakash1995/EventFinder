@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#24A501</color>
     <color name="grey">#282828</color>
+    <color name="snackBar_grey">#959595</color>
     <color name="track_tint">#C0C0C0</color>
     <color name="text_color">#C1C1C1</color>
 </resources>
