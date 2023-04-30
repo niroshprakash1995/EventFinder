@@ -3,6 +3,7 @@ package com.web.eventfinder;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,8 +13,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -21,9 +25,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.web.eventfinder.adapters.FavoritesAdapter;
 
@@ -33,34 +45,29 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SearchResultsFragment extends Fragment {
+
+    private ArrayList<SearchItem> searchItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
-
-        String json = getArguments().getString("searchItemsJson");
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<SearchItem>>() {}.getType();
-        ArrayList<SearchItem> searchItems = gson.fromJson(json, type);
+        String url = getArguments().getString("get_Data_url");
+        TextView noSearchResults = rootView.findViewById(R.id.no_search_results);
+        noSearchResults.setVisibility(View.GONE);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.search_result_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        getSearchResults(url, rootView, recyclerView);
 
-        TextView noSearchResults = rootView.findViewById(R.id.no_search_results);
-        if (searchItems.size() != 0) {
-            noSearchResults.setVisibility(View.GONE);
-            recyclerView.setAdapter(new SearchAdapter(getActivity().getApplicationContext(), searchItems));
-            recyclerView.setVisibility(View.VISIBLE);
 
-        } else {
-            noSearchResults.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        }
 
         TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
         // Add tab selection listener
@@ -89,12 +96,6 @@ public class SearchResultsFragment extends Fragment {
                         ImageView imageView = itemView.findViewById(R.id.favorite_icon);
                         if(searchIds.contains(id)){
                             imageView.setImageResource(R.drawable.fav_filled);
-                            Snackbar snackbar = Snackbar.make(rootView, " added to favorites", Snackbar.LENGTH_SHORT);
-                            View snackBarView= snackbar.getView();
-                            snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.snackBar_grey)));
-                            TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
-                            textView.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-                            snackbar.show();
                         }
                         else{
                             imageView.setImageResource(R.drawable.fav);
@@ -133,6 +134,112 @@ public class SearchResultsFragment extends Fragment {
             }
         });
         return rootView;
+    }
 
+
+    private void getSearchResults(String url, View view, RecyclerView recyclerView) {
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        ArrayList<SearchItem> searchItems = new ArrayList<>();
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                new Response.Listener <String> () {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("SUCCESS --- getCardData() --->", response.toString());
+                        Gson gson = new Gson();
+                        JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
+
+                        // Access embedded events array
+                        JsonObject embedded = jsonObject.getAsJsonObject("_embedded");
+                        JsonArray events = embedded != null ? embedded.getAsJsonArray("events") : new JsonArray();
+
+                        //Used CHAT GPT to generate code
+                        for (int i = 0; i < events.size(); i++) {
+                            JsonObject event = events.get(i).getAsJsonObject();
+
+                            // Access event properties with null checks
+                            String name = event.has("name") ? event.get("name").getAsString() : "";
+                            String id = event.has("id") ? event.get("id").getAsString() : "";
+                            String date = event.has("dates") && event.getAsJsonObject("dates").has("start") ?
+                                    event.getAsJsonObject("dates").getAsJsonObject("start").has("localDate") ?
+                                            event.getAsJsonObject("dates").getAsJsonObject("start").get("localDate").getAsString() :
+                                            "" :
+                                    "";
+                            String outputDate = "";
+                            if (date != "") {
+                                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                SimpleDateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+                                try {
+                                    Date dateInFormat = inputFormat.parse(date);
+                                    outputDate = outputFormat.format(dateInFormat);
+                                } catch (ParseException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            String time = event.has("dates") && event.getAsJsonObject("dates").has("start") ?
+                                    event.getAsJsonObject("dates").getAsJsonObject("start").has("localTime") ?
+                                            event.getAsJsonObject("dates").getAsJsonObject("start").get("localTime").getAsString() :
+                                            "" :
+                                    "";
+                            String outputTime = "";
+                            if (!time.isEmpty()) {
+                                SimpleDateFormat inputFormat = new SimpleDateFormat("HH:mm:ss");
+                                SimpleDateFormat outputFormat = new SimpleDateFormat("h:mma");
+                                try {
+                                    Date dateInp = inputFormat.parse(time);
+                                    String output = outputFormat.format(dateInp);
+                                    outputTime = output;
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            String image_url = event.has("images") && event.getAsJsonArray("images").size() > 0 ?
+                                    event.getAsJsonArray("images").get(0).getAsJsonObject().has("url") ?
+                                            event.getAsJsonArray("images").get(0).getAsJsonObject().get("url").getAsString() :
+                                            "" :
+                                    "";
+                            String category = event.has("classifications") && event.getAsJsonArray("classifications").size() > 0 ?
+                                    event.getAsJsonArray("classifications").get(0).getAsJsonObject().has("segment") ?
+                                            event.getAsJsonArray("classifications").get(0).getAsJsonObject().getAsJsonObject("segment").has("name") ?
+                                                    event.getAsJsonArray("classifications").get(0).getAsJsonObject().getAsJsonObject("segment").get("name").getAsString() :
+                                                    "" :
+                                            "" :
+                                    "";
+                            String venue = event.has("_embedded") && event.getAsJsonObject("_embedded").has("venues") &&
+                                    event.getAsJsonObject("_embedded").getAsJsonArray("venues").size() > 0 ?
+                                    event.getAsJsonObject("_embedded").getAsJsonArray("venues").get(0).getAsJsonObject().has("name") ?
+                                            event.getAsJsonObject("_embedded").getAsJsonArray("venues").get(0).getAsJsonObject().get("name").getAsString() :
+                                            "" :
+                                    "";
+                            searchItems.add(new SearchItem(id, image_url, name, venue, category, outputDate, outputTime));
+                        }
+                        // serialize the ArrayList to a JSON string
+                        Gson gson2 = new Gson();
+                        String json = gson2.toJson(searchItems);
+
+                        Type type = new TypeToken<ArrayList<SearchItem>>() {}.getType();
+                        ArrayList<SearchItem> searchItems = gson2.fromJson(json, type);
+
+                        ProgressBar progressBar = view.findViewById(R.id.searchResultsProgressBar);
+                        TextView noSearchResults = view.findViewById(R.id.no_search_results);
+                        if (searchItems.size() != 0) {
+                            noSearchResults.setVisibility(View.GONE);
+                            recyclerView.setAdapter(new SearchAdapter(getActivity().getApplicationContext(), searchItems));
+                            recyclerView.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                        } else {
+                            noSearchResults.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("ERROR --- getCardData() --->", error.toString());
+                error.printStackTrace();
+            }
+        });
+        queue.add(request);
     }
 }

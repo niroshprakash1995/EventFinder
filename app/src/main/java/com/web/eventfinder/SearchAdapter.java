@@ -2,10 +2,13 @@ package com.web.eventfinder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -50,6 +53,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 if(jsonObject.has("eventID") && jsonObject.get("eventID").equals(item.getSearch_id())){
                     searchHolder.favorite_icon.setImageResource(R.drawable.fav_filled);
+                    eventInFavorites = true;
                     break;
                 }
             }
@@ -67,8 +71,25 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
         searchHolder.itemView.setTag(item.getSearch_id());
         //Set tag to favorite icon
         searchHolder.favorite_icon.setTag(item.getSearch_id());
+        if(eventInFavorites){
+            searchHolder.favorite_icon.setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN);
+        }
+        else{
+            searchHolder.favorite_icon.setColorFilter(ContextCompat.getColor(context, R.color.text_color), PorterDuff.Mode.SRC_IN);
+        }
         //Set tag to image
         searchHolder.search_image.setTag((item.getSearch_image()));
+
+        if (searchHolder.search_name.isFocusable()) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    searchHolder.search_name.requestFocus();
+                    searchHolder.search_name.setHorizontallyScrolling(true);
+                    searchHolder.search_name.setSelected(true);
+                }
+            }, 1000);
+        }
     }
 
     @Override

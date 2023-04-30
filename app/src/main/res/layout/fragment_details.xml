@@ -72,7 +72,7 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:text="Levi's stadium"
+                android:text="Test Test"
                 android:textColor="@color/green"
                 android:layout_below="@+id/artistTeamsTitle"
                 android:layout_marginTop="20dp"/>
@@ -99,7 +99,7 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:text="Sep 16, 2023"
+                android:text="Test Test"
                 android:textColor="@color/green"
                 android:layout_below="@+id/venueTitle"
                 android:layout_marginTop="20dp"/>
@@ -223,7 +223,8 @@
                 android:text="Buy Tickets At"
                 android:textColor="@color/white"
                 android:layout_below="@+id/ticketStatusTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
 
             <TextView
                 android:id="@+id/buyTicketsAtValue"
@@ -241,14 +242,14 @@
                 android:text="https://www.google.com/search?q=how+to+show+loader+betwen+active+and+fragment"
                 android:textColor="@color/green"
                 android:layout_below="@+id/ticketStatusTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
 
             <ImageView
                 android:id="@+id/search_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_below="@+id/buyTicketsAtTitle"
-                android:src="@drawable/test_img"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="25dp"

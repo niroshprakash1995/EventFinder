@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -69,8 +70,8 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
                 if(eventInFavorites){
                     //Change icon to empty heart
                     favorite_icon.setImageResource(R.drawable.fav);
-
-                    Snackbar snackbar = Snackbar.make(v, search_name.getText() + " added to favorites", Snackbar.LENGTH_SHORT);
+                    favorite_icon.setColorFilter(ContextCompat.getColor(context, R.color.text_color), PorterDuff.Mode.SRC_IN);
+                    Snackbar snackbar = Snackbar.make(v, search_name.getText() + " removed from favorites", Snackbar.LENGTH_SHORT);
                     View snackBarView= snackbar.getView();
                     snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.snackBar_grey)));
                     TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
@@ -93,7 +94,8 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
                     jsonArray.put(jsonObject);
                     //Change icon to full heart
                     favorite_icon.setImageResource(R.drawable.fav_filled);
-                    Snackbar snackbar = Snackbar.make(v, search_name.getText() + " removed from favorites", Snackbar.LENGTH_SHORT);
+                    favorite_icon.setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN);
+                    Snackbar snackbar = Snackbar.make(v, search_name.getText() + " added to favorites", Snackbar.LENGTH_SHORT);
                     View snackBarView= snackbar.getView();
                     snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.snackBar_grey)));
                     TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);

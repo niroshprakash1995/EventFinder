@@ -157,10 +157,10 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                     JsonArray classifications = eventData.get("classifications").getAsJsonArray();
                     if(!classifications.isJsonNull() && classifications.size() > 0){
                         JsonObject classification = classifications.get(0).getAsJsonObject();
-                        if(classification.has("segment") && classification.get("segment").getAsJsonObject().get("name").toString() != ""){
+                        if(classification.has("segment") && classification.get("segment").getAsJsonObject().get("name").toString() != "" && !classification.get("segment").getAsJsonObject().get("name").getAsString().toLowerCase().equals("undefined")){
                             genres = classification.get("segment").getAsJsonObject().get("name").toString();
                         }
-                        if(classification.has("genre") && classification.get("genre").getAsJsonObject().get("name").toString() != ""){
+                        if(classification.has("genre") && classification.get("genre").getAsJsonObject().get("name").toString() != "" && !classification.get("genre").getAsJsonObject().get("name").getAsString().toLowerCase().equals("undefined")){
                             if(genres != ""){
                                 genres = genres + " | " + classification.get("genre").getAsJsonObject().get("name").toString();
                             }
@@ -169,7 +169,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                             }
                         }
 
-                        if(classification.has("subGenre") && classification.get("subGenre").getAsJsonObject().get("name").toString() != ""){
+                        if(classification.has("subGenre") && classification.get("subGenre").getAsJsonObject().get("name").toString() != "" && !classification.get("subGenre").getAsJsonObject().get("name").getAsString().toLowerCase().equals("undefined")){
                             if(genres != ""){
                                 genres = genres + " | " + classification.get("subGenre").getAsJsonObject().get("name").toString();
                             }
@@ -178,7 +178,8 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                             }
                         }
 
-                        if(classification.has("type") && classification.get("type").getAsJsonObject().get("name").toString() != ""){
+                        if(classification.has("type") && classification.get("type").getAsJsonObject().get("name").toString() != "" && !classification.get("type").getAsJsonObject().get("name").getAsString().toLowerCase().equals("undefined")){
+                            Log.d("xx", classification.get("type").getAsJsonObject().get("name").toString().toLowerCase());
                             if(genres != ""){
                                 genres = genres + " | " + classification.get("type").getAsJsonObject().get("name").toString();
                             }
@@ -187,7 +188,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                             }
                         }
 
-                        if(classification.has("subType") && classification.get("subType").getAsJsonObject().get("name").toString() != ""){
+                        if(classification.has("subType") && classification.get("subType").getAsJsonObject().get("name").toString() != "" && !classification.get("subType").getAsJsonObject().get("name").getAsString().toLowerCase().equals("undefined")){
                             if(genres != ""){
                                 genres = genres + " | " + classification.get("subType").getAsJsonObject().get("name").toString();
                             }
@@ -205,12 +206,12 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                         if(pRanges.get(0).getAsJsonObject().get("min").getAsString() != ""){
                             priceRange = pRanges.get(0).getAsJsonObject().get("min").getAsString();
                         }
-                        if(pRanges.get(0).getAsJsonObject().get("min").getAsString() != ""){
+                        if(pRanges.get(0).getAsJsonObject().get("max").getAsString() != ""){
                             if(priceRange != ""){
-                                priceRange = priceRange + " - " + pRanges.get(0).getAsJsonObject().get("min").getAsString();
+                                priceRange = priceRange + " - " + pRanges.get(0).getAsJsonObject().get("max").getAsString();
                             }
                             else {
-                                priceRange = pRanges.get(0).getAsJsonObject().get("min").getAsString();
+                                priceRange = pRanges.get(0).getAsJsonObject().get("max").getAsString();
                             }
                         }
                         priceRange = priceRange + " USD";
@@ -293,6 +294,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                             JsonObject venueObj = venuesObj.get(0).getAsJsonObject();
 
                             String name = venueObj.get("name").getAsString();
+
                             String address = "";
                             String cityState = "";
                             String contactInfo = "";
@@ -301,6 +303,9 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                             String childRule = "";
 
                             venueItem = new VenueItem();
+
+                            //For name
+                            venueItem.setName(name);
 
                             //For address
                             if(venueObj.has("address")){

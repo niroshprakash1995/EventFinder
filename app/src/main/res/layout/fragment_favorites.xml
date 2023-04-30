@@ -27,5 +27,6 @@
         android:text="No favorites available"
         android:textColor="#24A501"
         android:textSize="20sp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:textStyle="bold"/>
 </LinearLayout>

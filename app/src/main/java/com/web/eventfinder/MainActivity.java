@@ -88,15 +88,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Need to remove these
-        SharedPreferences.Editor editor = getSharedPreferences("sharedpref", Context.MODE_PRIVATE).edit();
-        editor.clear();
-        editor.commit();
-
-        SharedPreferences.Editor editor1 = getSharedPreferences("formsharedpref", Context.MODE_PRIVATE).edit();
-        editor1.clear();
-        editor1.commit();
-
         //Request location permission
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                 PackageManager.PERMISSION_GRANTED);

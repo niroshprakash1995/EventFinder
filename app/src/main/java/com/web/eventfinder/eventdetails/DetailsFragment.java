@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,9 +69,17 @@ public class DetailsFragment extends Fragment {
         genresValue.setSelected(true);
 
         TextView priceRangeValue = view.findViewById(R.id.priceRangeValue);
-        priceRangeValue.setText(detailsItem.getPriceRange());
+        if(detailsItem.getPriceRange().isEmpty()){
+            TextView priceRangeTitle = view.findViewById(R.id.priceRangeTitle);
+            priceRangeTitle.setVisibility(View.GONE);
+            priceRangeValue.setVisibility(View.GONE);
+        }
+        else{
+            priceRangeValue.setText(detailsItem.getPriceRange());
+        }
 
         TextView ticketStatusValue = view.findViewById(R.id.ticketStatusValue);
+        Log.d("XX", detailsItem.getTicketStatus());
         ticketStatusValue.setText(detailsItem.getTicketStatus());
 
         TextView buyTicketsAtValue = view.findViewById(R.id.buyTicketsAtValue);
@@ -87,8 +96,12 @@ public class DetailsFragment extends Fragment {
         });
 
         ImageView search_image = view.findViewById(R.id.search_image);
-        Picasso.get().load(detailsItem.getSeatMapLink()).fit().into(search_image);
-
+        if(!detailsItem.getSeatMapLink().isEmpty()){
+            Picasso.get().load(detailsItem.getSeatMapLink()).fit().into(search_image);
+        }
+        else{
+            search_image.setVisibility(View.GONE);
+        }
         ((EventDetailsActivity) getActivity()).hideProgressBar();
     }
 }

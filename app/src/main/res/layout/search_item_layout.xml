@@ -26,29 +26,33 @@
             android:src="@drawable/test_img"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_background"
+            android:clipToOutline="true"/>
         <TextView
             android:layout_width="150dp"
             android:layout_height="33dp"
             android:id="@+id/search_name"
-            android:layout_marginLeft="110dp"
-            android:textColor="@color/white"
-            android:text="Sacramento kings vs Los Angeles Lakers"
+            android:layout_marginLeft="115dp"
+            android:textColor="@color/text_color"
+            android:text="XXXX vs YYYY"
             android:gravity="center_vertical"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:singleLine="true"
             android:scrollHorizontally="true"
             android:ellipsize="marquee"
-            android:marqueeRepeatLimit ="marquee_forever" />
+            android:marqueeRepeatLimit ="marquee_forever"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:layout_width="150dp"
             android:layout_height="33dp"
             android:id="@+id/search_venue"
-            android:layout_marginLeft="110dp"
-            android:textColor="@color/white"
-            android:text="Golden 1 Center"
+            android:layout_marginLeft="115dp"
+            android:textColor="@color/text_color"
+            android:text="Center X Center"
             android:layout_marginTop="33dp"
             android:gravity="center_vertical"
             android:focusable="true"
@@ -62,8 +66,8 @@
             android:layout_width="150dp"
             android:layout_height="33dp"
             android:id="@+id/search_category"
-            android:layout_marginLeft="110dp"
-            android:textColor="@color/white"
+            android:layout_marginLeft="115dp"
+            android:textColor="@color/text_color"
             android:text="Sports"
             android:layout_marginTop="66dp"
             android:gravity="center_vertical"
@@ -78,8 +82,9 @@
             android:layout_height="33dp"
             android:id="@+id/search_date"
             android:layout_marginLeft="260dp"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:text="03/24/2023"
+            android:textStyle="italic"
             android:gravity="right | center_vertical"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -93,7 +98,8 @@
             android:layout_height="33dp"
             android:id="@+id/search_time"
             android:layout_marginLeft="260dp"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
+            android:textStyle="italic"
             android:text="7:00PM"
             android:layout_marginTop="33dp"
             android:gravity="right | center_vertical"
@@ -111,7 +117,8 @@
             android:layout_marginLeft="320dp"
             android:layout_marginTop="66dp"
             android:layout_gravity="left"
-            android:src="@drawable/fav" />
+            android:src="@drawable/fav"
+            app:tint="@color/text_color"/>
 
 
     </androidx.cardview.widget.CardView>

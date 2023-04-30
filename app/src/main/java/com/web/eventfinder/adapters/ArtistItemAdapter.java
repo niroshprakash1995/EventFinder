@@ -54,7 +54,7 @@ public class ArtistItemAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         holder.artistFollowers.setText(artistFollowers + " Followers");
         holder.artistSpotifyLink.setClickable(true);
         holder.artistSpotifyLink.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='" + artistSpotifyLinkVal + "'> Check out on Spotify </a>";
+        String text = "<a href='" + artistSpotifyLinkVal + "'>Check out on Spotify</a>";
         holder.artistSpotifyLink.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
         holder.artistSpotifyLink.setOnClickListener(new View.OnClickListener() {
             @Override

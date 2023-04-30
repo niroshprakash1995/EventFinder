@@ -97,7 +97,7 @@
             android:id="@+id/artistPopularityNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="206dp"
+            android:layout_marginStart="202dp"
             android:layout_marginTop="46dp"
             android:layout_toEndOf="@+id/artistImage"
             android:text="90"

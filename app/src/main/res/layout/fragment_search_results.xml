@@ -54,4 +54,17 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/searchResultsProgressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="175dp"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/green"/>
 </LinearLayout>

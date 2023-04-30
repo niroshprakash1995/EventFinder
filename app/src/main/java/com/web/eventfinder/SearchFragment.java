@@ -1,18 +1,13 @@
 package com.web.eventfinder;
 
 
-import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.location.Location;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -46,18 +41,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-
-//import com.google.android.gms.location.FusedLocationProviderClient;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import ch.hsr.geohash.GeoHash;
 import io.github.muddz.styleabletoast.StyleableToast;
@@ -84,26 +70,6 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-
-//        Add  implements LocationListener to the class
-//        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-//        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//
-//        }
-//        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 0, 0, this);
-
-        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //Do nothing
-        }
-        else{
-            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(lastKnownLocation != null){
-                latitude = lastKnownLocation.getLatitude();
-                longitude = lastKnownLocation.getLongitude();
-            }
-        }
-
         return view;
     }
 
@@ -111,7 +77,6 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Get reference to views
         getViews(view);
 
         adapter = new ArrayAdapter < String > (getContext(), R.layout.dropdown_layout, new ArrayList < String > ());
@@ -244,8 +209,12 @@ public class SearchFragment extends Fragment {
         getGeohash(location, new GeohashCallback() {
             @Override
             public void onSuccess(String geohash) {
+                String categoryVal = category;
+                if(category.equals("All")){
+                    categoryVal = "Default";
+                }
                 String get_Data_url = API_URL_GET_DATA + "?keyword=" + keyword + "&distance=" + distance +
-                        "&category=" + category + "&geohash=" + geohash;
+                        "&category=" + categoryVal + "&geohash=" + geohash;
 
                 //Put the data Shared Preferences
                 SharedPreferences sharedPref = getContext().getSharedPreferences("formsharedpref",Context.MODE_PRIVATE);
@@ -259,7 +228,11 @@ public class SearchFragment extends Fragment {
                 editor.putString("location", location);
                 editor.commit();
 
-                getSearchResults(get_Data_url, view);
+//                getSearchResults(get_Data_url, view);
+                // create a bundle and put the URL string into it
+                Bundle bundle = new Bundle();
+                bundle.putString("get_Data_url", get_Data_url);
+                Navigation.findNavController(view).navigate(R.id.action_first_fragment_to_second_fragment, bundle);
             }
 
             @Override
@@ -414,107 +387,6 @@ public class SearchFragment extends Fragment {
         queue.add(stringRequest);
     }
 
-    private void getSearchResults(String url, View view) {
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        StringRequest request = new StringRequest(Request.Method.GET, url,
-                new Response.Listener <String> () {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("SUCCESS --- getCardData() --->", response.toString());
-                        Gson gson = new Gson();
-                        JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
-
-                        // Access embedded events array
-                        JsonObject embedded = jsonObject.getAsJsonObject("_embedded");
-                        JsonArray events = embedded != null ? embedded.getAsJsonArray("events") : new JsonArray();
-
-
-                        searchItems = new ArrayList < > ();
-                        //Used CHAT GPT to generate code
-                        for (int i = 0; i < events.size(); i++) {
-                            JsonObject event = events.get(i).getAsJsonObject();
-
-                            // Access event properties with null checks
-                            String name = event.has("name") ? event.get("name").getAsString() : "";
-                            String id = event.has("id") ? event.get("id").getAsString() : "";
-                            String date = event.has("dates") && event.getAsJsonObject("dates").has("start") ?
-                                    event.getAsJsonObject("dates").getAsJsonObject("start").has("localDate") ?
-                                            event.getAsJsonObject("dates").getAsJsonObject("start").get("localDate").getAsString() :
-                                            "" :
-                                    "";
-                            String outputDate = "";
-                            if (date != "") {
-                                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                SimpleDateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
-                                try {
-                                    Date dateInFormat = inputFormat.parse(date);
-                                    outputDate = outputFormat.format(dateInFormat);
-                                } catch (ParseException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
-                            String time = event.has("dates") && event.getAsJsonObject("dates").has("start") ?
-                                    event.getAsJsonObject("dates").getAsJsonObject("start").has("localTime") ?
-                                            event.getAsJsonObject("dates").getAsJsonObject("start").get("localTime").getAsString() :
-                                            "" :
-                                    "";
-                            String outputTime = "";
-                            if (!time.isEmpty()) {
-                                SimpleDateFormat inputFormat = new SimpleDateFormat("HH:mm:ss");
-                                SimpleDateFormat outputFormat = new SimpleDateFormat("h:mma");
-                                try {
-                                    Date dateInp = inputFormat.parse(time);
-                                    String output = outputFormat.format(dateInp);
-                                    outputTime = output;
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            String image_url = event.has("images") && event.getAsJsonArray("images").size() > 0 ?
-                                    event.getAsJsonArray("images").get(0).getAsJsonObject().has("url") ?
-                                            event.getAsJsonArray("images").get(0).getAsJsonObject().get("url").getAsString() :
-                                            "" :
-                                    "";
-                            String category = event.has("classifications") && event.getAsJsonArray("classifications").size() > 0 ?
-                                    event.getAsJsonArray("classifications").get(0).getAsJsonObject().has("segment") ?
-                                            event.getAsJsonArray("classifications").get(0).getAsJsonObject().getAsJsonObject("segment").has("name") ?
-                                                    event.getAsJsonArray("classifications").get(0).getAsJsonObject().getAsJsonObject("segment").get("name").getAsString() :
-                                                    "" :
-                                            "" :
-                                    "";
-                            String venue = event.has("_embedded") && event.getAsJsonObject("_embedded").has("venues") &&
-                                    event.getAsJsonObject("_embedded").getAsJsonArray("venues").size() > 0 ?
-                                    event.getAsJsonObject("_embedded").getAsJsonArray("venues").get(0).getAsJsonObject().has("name") ?
-                                            event.getAsJsonObject("_embedded").getAsJsonArray("venues").get(0).getAsJsonObject().get("name").getAsString() :
-                                            "" :
-                                    "";
-                            searchItems.add(new SearchItem(id, image_url, name, venue, category, outputDate, outputTime));
-                        }
-                        // serialize the ArrayList to a JSON string
-                        Gson gson2 = new Gson();
-                        String json = gson2.toJson(searchItems);
-
-                        // create a bundle and put the JSON string into it
-                        Bundle bundle = new Bundle();
-                        bundle.putString("searchItemsJson", json);
-                        Navigation.findNavController(view).navigate(R.id.action_first_fragment_to_second_fragment, bundle);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("ERROR --- getCardData() --->", error.toString());
-                error.printStackTrace();
-            }
-        });
-        queue.add(request);
-    }
-
-//    @Override
-//    public void onLocationChanged(Location location) {
-//        Log.d("Latitude:", String.valueOf(location.getLatitude()));
-//        Log.d("Longitude:", String.valueOf(location.getLongitude()));
-//    }
 }
 
 

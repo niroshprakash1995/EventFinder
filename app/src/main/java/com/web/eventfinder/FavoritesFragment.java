@@ -56,7 +56,6 @@ public class FavoritesFragment extends Fragment {
                         if (jsonArray.length() == 0) {
                             noFavorites = true;
                         } else {
-
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObj = (JSONObject) jsonArray.get(i);
                                 String search_image = jsonObj.get("search_image").toString();
@@ -85,6 +84,8 @@ public class FavoritesFragment extends Fragment {
                     } else {
                         RecyclerView recyclerView = rootView.findViewById(R.id.favorites_recyclerview);
                         recyclerView.setVisibility(View.GONE);
+                        TextView noEvents = getView().findViewById(R.id.no_favorites_available);
+                        noEvents.setVisibility(View.VISIBLE);
                     }
                 }
             }

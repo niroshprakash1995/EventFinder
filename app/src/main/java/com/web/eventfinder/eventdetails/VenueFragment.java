@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -58,6 +59,7 @@ public class VenueFragment extends Fragment {
         populateVenueDetails(view);
 
         TextView openHoursValue = view.findViewById(R.id.openHoursValue);
+
         openHoursValue.setOnClickListener(new View.OnClickListener() {
             boolean isExpanded = false;
 
@@ -142,16 +144,50 @@ public class VenueFragment extends Fragment {
         cityState.setSelected(true);
 
         TextView contactInfo = view.findViewById(R.id.venueContactInfoValue);
-        contactInfo.setText(venueItem.getContactInfo());
-        contactInfo.setSelected(true);
+        if(venueItem.getContactInfo().isEmpty()){
+            TextView contactInfoTitle = view.findViewById(R.id.venueContactInfoTitle);
+            contactInfo.setVisibility(View.GONE);
+            contactInfoTitle.setVisibility(View.GONE);
+        }
+        else{
+            contactInfo.setText(venueItem.getContactInfo());
+            contactInfo.setSelected(true);
+        }
 
         TextView openHours = view.findViewById(R.id.openHoursValue);
-        openHours.setText(venueItem.getOpenHoursDetail());
+        if(venueItem.getOpenHoursDetail().isEmpty()){
+            TextView openHoursTitle = view.findViewById(R.id.openHoursTitle);
+            openHoursTitle.setVisibility(View.GONE);
+            openHours.setVisibility(View.GONE);
+        }
+        else{
+            openHours.setText(venueItem.getOpenHoursDetail());
+        }
 
         TextView generalRules = view.findViewById(R.id.generalRulesValue);
-        generalRules.setText(venueItem.getGeneralRule());
+        if(venueItem.getGeneralRule().isEmpty()){
+            TextView generalRulesTitle = view.findViewById(R.id.generalRulesTitle);
+            generalRulesTitle.setVisibility(View.GONE);
+            generalRules.setVisibility(View.GONE);
+        }
+        else{
+            generalRules.setText(venueItem.getGeneralRule());
+        }
 
         TextView childRules = view.findViewById(R.id.childRulesValue);
-        childRules.setText(venueItem.getChildRule());
+        if(venueItem.getChildRule().isEmpty()){
+            TextView childRulesTitle = view.findViewById(R.id.childRulesTitle);
+            childRulesTitle.setVisibility(View.GONE);
+            childRules.setVisibility(View.GONE);
+        }
+        else{
+            childRules.setText(venueItem.getChildRule());
+        }
+
+        if(venueItem.getOpenHoursDetail().isEmpty() && venueItem.getGeneralRule().isEmpty() && venueItem.getChildRule().isEmpty()){
+            CardView cardview = view.findViewById(R.id.venue_card2);
+            cardview.setVisibility(View.GONE);
+        }
+
     }
 }

@@ -55,9 +55,16 @@ public class ArtistsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        recyclerView = getView().findViewById(R.id.artists_recyclerview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new ArtistItemAdapter((Activity) getActivity(), artistsDataList));
+        if(artistsDataList.size() == 0){
+            getView().findViewById(R.id.artist_music_data_unavailable).setVisibility(View.VISIBLE);
+        }
+        else{
+            getView().findViewById(R.id.artist_music_data_unavailable).setVisibility(View.GONE);
+            recyclerView = getView().findViewById(R.id.artists_recyclerview);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(new ArtistItemAdapter((Activity) getActivity(), artistsDataList));
+        }
+
     }
 }
