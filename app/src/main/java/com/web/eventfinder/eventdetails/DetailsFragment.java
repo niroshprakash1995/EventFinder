@@ -79,7 +79,6 @@ public class DetailsFragment extends Fragment {
         }
 
         TextView ticketStatusValue = view.findViewById(R.id.ticketStatusValue);
-        Log.d("XX", detailsItem.getTicketStatus());
         ticketStatusValue.setText(detailsItem.getTicketStatus());
 
         TextView buyTicketsAtValue = view.findViewById(R.id.buyTicketsAtValue);

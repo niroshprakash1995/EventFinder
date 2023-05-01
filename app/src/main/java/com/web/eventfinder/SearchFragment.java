@@ -93,7 +93,7 @@ public class SearchFragment extends Fragment {
         autoCompleteTextView_keyword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                autoCompleteProgressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -164,6 +164,7 @@ public class SearchFragment extends Fragment {
         if (bundle != null) {
             String old_keyword = bundle.getString("old_keyword");
             autoCompleteTextView_keyword.setText(old_keyword);
+            autoCompleteProgressBar.setVisibility(View.GONE);
             String old_distance = bundle.getString("old_distance", "");
             distanceEditText.setText(old_distance);
             int old_categoryIndex = bundle.getInt("old_categoryIndex", 0);

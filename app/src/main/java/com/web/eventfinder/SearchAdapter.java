@@ -3,6 +3,7 @@ package com.web.eventfinder;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
         }
 
         searchHolder.search_name.setText(searchItems.get(position).getSearch_name());
+        searchHolder.search_name.setSelected(true);
         searchHolder.search_venue.setText(searchItems.get(position).getSearch_venue());
         searchHolder.search_category.setText(searchItems.get(position).getSearch_category());
         searchHolder.search_date.setText(searchItems.get(position).getSearch_date());
@@ -80,16 +82,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
         //Set tag to image
         searchHolder.search_image.setTag((item.getSearch_image()));
 
-        if (searchHolder.search_name.isFocusable()) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    searchHolder.search_name.requestFocus();
+
+        new CountDownTimer(500, 500) {
+            public void onTick(long millisUntilFinished) {
+                // Do nothing while waiting for the timer to finish
+            }
+            public void onFinish() {
+                if (searchHolder.search_name.isFocusable()) {
+                    searchHolder.search_name.setFocusable(true);
                     searchHolder.search_name.setHorizontallyScrolling(true);
                     searchHolder.search_name.setSelected(true);
                 }
-            }, 1000);
-        }
+            }
+        }.start();
+
     }
 
     @Override

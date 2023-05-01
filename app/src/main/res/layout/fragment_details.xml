@@ -47,8 +47,9 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:text="TextView | TextView | TextView | TextView | TextView |"
-                android:textColor="@color/green"/>
+                android:text="Test Test"
+                android:textColor="@color/green"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/venueTitle"
@@ -75,7 +76,8 @@
                 android:text="Test Test"
                 android:textColor="@color/green"
                 android:layout_below="@+id/artistTeamsTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/dateTitle"
@@ -102,7 +104,8 @@
                 android:text="Test Test"
                 android:textColor="@color/green"
                 android:layout_below="@+id/venueTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
 
 
@@ -128,10 +131,11 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:text="6:00 PM"
+                android:text="Test PM"
                 android:textColor="@color/green"
                 android:layout_below="@+id/dateTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
 
 
@@ -157,10 +161,11 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:text="Music | Pop | Pop"
+                android:text="Test Test"
                 android:textColor="@color/green"
                 android:layout_below="@+id/timeTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/priceRangeTitle"
@@ -184,10 +189,11 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:text="49 - 159 (USD)"
+                android:text="Test Test"
                 android:textColor="@color/green"
                 android:layout_below="@+id/genresTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
 
             <TextView

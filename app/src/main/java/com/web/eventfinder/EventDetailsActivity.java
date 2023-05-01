@@ -242,61 +242,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public  boolean onCreateOptionsMenu(Menu menu){
-//
-//        getMenuInflater().inflate(R.menu.event_details_menu, menu);
-//        // Get the support action bar
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setTitle("XXXXXXXXXXXXXXXXXXXXX");
-//
-//
-//        // Set the background color of the action bar
-//        int color = ContextCompat.getColor(this, R.color.grey);
-//        actionBar.setBackgroundDrawable(new ColorDrawable(color));
-//
-//        MenuItem facebookMenuItem = menu.findItem(R.id.action_facebook);
-//        facebookMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                String facebookUrl = facebookLink;
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(facebookUrl));
-//                startActivity(intent);
-//                return true;
-//            }
-//        });
-//
-//        MenuItem twitterMenuItem = menu.findItem(R.id.action_twitter);
-//        twitterMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                String twitterUrl = twitterLink;
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(twitterUrl));
-//                startActivity(intent);
-//                return true;
-//            }
-//        });
-//
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item){
-//        switch(item.getItemId()){
-//            case R.id.action_facebook:
-//                return true;
-//            case R.id.action_twitter:
-//                return true;
-//            case R.id.action_heart_filled:
-//                return true;
-//            default:
-//                return true;
-//        }
-//    }
-
     public void getEventDetails(String eventId, String venueName, final EventDetailsCallback callback){
         String url = API_URL_SEARCH_EVENT + "?id=" + eventId + "&venue=" + venueName;
         Log.d("URL ------> ", url);

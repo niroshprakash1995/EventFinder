@@ -1,6 +1,7 @@
 package com.web.eventfinder.adapters;
 
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -48,6 +49,19 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder>{
         favHolder.favorite_icon1.setTag(item.getSearch_id());
         //Set tag to image
         favHolder.search_image1.setTag((item.getSearch_image()));
+
+        new CountDownTimer(500, 500) {
+            public void onTick(long millisUntilFinished) {
+                // Do nothing while waiting for the timer to finish
+            }
+            public void onFinish() {
+                if (favHolder.search_name1.isFocusable()) {
+                    favHolder.search_name1.setFocusable(true);
+                    favHolder.search_name1.setHorizontallyScrolling(true);
+                    favHolder.search_name1.setSelected(true);
+                }
+            }
+        }.start();
     }
 
     @Override

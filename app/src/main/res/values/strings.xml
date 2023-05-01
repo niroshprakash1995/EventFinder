@@ -6,8 +6,8 @@
     <string name="search_fragment">Search fragment</string>
     <string name="favorites_fragment">Favorites fragment</string>
     <string-array name="categories">
-        <item>Music</item>
         <item>All</item>
+        <item>Music</item>
         <item>Sports</item>
         <item>Arts &amp; Theatre</item>
         <item>Film</item>

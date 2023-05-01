@@ -39,8 +39,6 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
         search_time = itemView.findViewById(R.id.search_time);
 
 
-
-
         favorite_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

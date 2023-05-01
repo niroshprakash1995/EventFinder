@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:text="Keyword*"
                 android:textColor="#24A501"
@@ -60,8 +60,7 @@
                     android:textColor="@color/white"
                     android:textColorHighlight="#24A501"
                     android:textColorHint="#7D837C"
-                    android:textColorLink="@color/white"
-                    android:text="P!nk" />
+                    android:textColorLink="@color/white" />
 
                 <ProgressBar
                     android:id="@+id/progressLoading"
@@ -177,14 +176,14 @@
                 android:textColorHint="#FF7D837C"
                 android:textColorLink="#24A501"
                 android:textSize="20sp"
-                android:text="Los Angeles"
                 android:theme="@style/Theme.EventFinder"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp">
 
 
                 <Button
@@ -198,7 +197,8 @@
                     android:text="Search"
                     android:textAllCaps="false"
                     app:cornerRadius="8dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textSize="15dp"/>
 
                 <Button
                     android:id="@+id/clear_button"
@@ -211,7 +211,8 @@
                     android:text="Clear"
                     android:textAllCaps="false"
                     app:cornerRadius="8dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textSize="15dp"/>
             </LinearLayout>
 
 
