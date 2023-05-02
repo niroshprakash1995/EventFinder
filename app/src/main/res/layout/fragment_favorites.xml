@@ -13,7 +13,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/favorites_recyclerview" />
+        android:id="@+id/favorites_recyclerview"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@color/lightGreen"/>
 
     <TextView
         android:id="@+id/no_favorites_available"

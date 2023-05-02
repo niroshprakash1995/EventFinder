@@ -228,7 +228,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                 tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
-                        Log.d("Tab", "Selected tab at position: " + tab.getPosition());
                         viewPager.setCurrentItem(tab.getPosition());
                     }
 
@@ -244,13 +243,11 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     public void getEventDetails(String eventId, String venueName, final EventDetailsCallback callback){
         String url = API_URL_SEARCH_EVENT + "?id=" + eventId + "&venue=" + venueName;
-        Log.d("URL ------> ", url);
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener <JSONObject> () {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("SUCCESS --- EventDetailsActivity --> getEventDetails() --->", response.toString());
                         Gson gson = new Gson();
                         jsonObject = JsonParser.parseString(response.toString()).getAsJsonObject();
                         isDataReceived = true;
@@ -271,7 +268,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ERROR --- EventDetailsActivity --> getEventDetails() --->", error.toString());
                 error.printStackTrace();
             }
         });

@@ -10,12 +10,13 @@ public class DetailsItem {
     String ticketStatus;
     String buyTicketLink;
     String seatMapLink;
+    String ticketStatusColor;
 
     public DetailsItem(){
     super();
     }
 
-    public DetailsItem(String artistNames, String venueName, String date, String time, String genres, String priceRange, String ticketStatus, String buyTicketLink, String seatMapLink) {
+    public DetailsItem(String artistNames, String venueName, String date, String time, String genres, String priceRange, String ticketStatus, String ticketStatusColor, String buyTicketLink, String seatMapLink) {
         this.artistNames = artistNames;
         this.venueName = venueName;
         this.date = date;
@@ -23,6 +24,7 @@ public class DetailsItem {
         this.genres = genres;
         this.priceRange = priceRange;
         this.ticketStatus = ticketStatus;
+        this.ticketStatusColor = ticketStatusColor;
         this.buyTicketLink = buyTicketLink;
         this.seatMapLink = seatMapLink;
     }
@@ -81,6 +83,14 @@ public class DetailsItem {
 
     public void setTicketStatus(String ticketStatus) {
         this.ticketStatus = ticketStatus;
+    }
+
+    public String getTicketStatusColor() {
+        return ticketStatusColor;
+    }
+
+    public void setTicketStatusColor(String ticketStatusColor) {
+        this.ticketStatusColor = ticketStatusColor;
     }
 
     public String getBuyTicketLink() {

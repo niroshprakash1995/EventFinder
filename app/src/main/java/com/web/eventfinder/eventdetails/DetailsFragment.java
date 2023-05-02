@@ -1,30 +1,23 @@
 package com.web.eventfinder.eventdetails;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 import com.web.eventfinder.EventDetailsActivity;
 import com.web.eventfinder.R;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class DetailsFragment extends Fragment {
 
@@ -80,6 +73,22 @@ public class DetailsFragment extends Fragment {
 
         TextView ticketStatusValue = view.findViewById(R.id.ticketStatusValue);
         ticketStatusValue.setText(detailsItem.getTicketStatus());
+        String ticketStatusColor = "#24A501";
+        switch(detailsItem.getTicketStatusColor()){
+                case "green":
+                    ticketStatusColor = "#24A501";
+                    break;
+                case "red":
+                    ticketStatusColor = "#FF0000";
+                    break;
+                case "black":
+                    ticketStatusColor = "#000000";
+                    break;
+                case "orange":
+                    ticketStatusColor = "#FFA500";
+                    break;
+            }
+        ticketStatusValue.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(ticketStatusColor)));
 
         TextView buyTicketsAtValue = view.findViewById(R.id.buyTicketsAtValue);
         buyTicketsAtValue.setText(detailsItem.getBuyTicketLink());
@@ -96,7 +105,7 @@ public class DetailsFragment extends Fragment {
 
         ImageView search_image = view.findViewById(R.id.search_image);
         if(!detailsItem.getSeatMapLink().isEmpty()){
-            Picasso.get().load(detailsItem.getSeatMapLink()).fit().into(search_image);
+            Picasso.get().load(detailsItem.getSeatMapLink()).fit().error(R.mipmap.no_seat_map).into(search_image);
         }
         else{
             search_image.setVisibility(View.GONE);

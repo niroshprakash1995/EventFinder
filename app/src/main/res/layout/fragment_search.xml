@@ -198,7 +198,7 @@
                     android:textAllCaps="false"
                     app:cornerRadius="8dp"
                     android:textStyle="bold"
-                    android:textSize="15dp"/>
+                    android:textSize="18dp"/>
 
                 <Button
                     android:id="@+id/clear_button"
@@ -212,7 +212,7 @@
                     android:textAllCaps="false"
                     app:cornerRadius="8dp"
                     android:textStyle="bold"
-                    android:textSize="15dp"/>
+                    android:textSize="17dp"/>
             </LinearLayout>
 
 

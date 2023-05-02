@@ -2,28 +2,19 @@ package com.web.eventfinder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,25 +22,29 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.web.eventfinder.adapters.FavoritesAdapter;
+import com.web.eventfinder.adapters.SearchAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class SearchResultsFragment extends Fragment {
 
@@ -144,7 +139,6 @@ public class SearchResultsFragment extends Fragment {
                 new Response.Listener <String> () {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("SUCCESS --- getCardData() --->", response.toString());
                         Gson gson = new Gson();
                         JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
 
@@ -152,7 +146,6 @@ public class SearchResultsFragment extends Fragment {
                         JsonObject embedded = jsonObject.getAsJsonObject("_embedded");
                         JsonArray events = embedded != null ? embedded.getAsJsonArray("events") : new JsonArray();
 
-                        //Used CHAT GPT to generate code
                         for (int i = 0; i < events.size(); i++) {
                             JsonObject event = events.get(i).getAsJsonObject();
 
@@ -223,6 +216,11 @@ public class SearchResultsFragment extends Fragment {
                         ProgressBar progressBar = view.findViewById(R.id.searchResultsProgressBar);
                         TextView noSearchResults = view.findViewById(R.id.no_search_results);
                         if (searchItems.size() != 0) {
+                            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
+                            Collections.sort(searchItems, Comparator.comparing((SearchItem s) -> LocalDate.parse(s.getSearch_date(), dateFormatter))
+                                    .thenComparing((SearchItem s) -> LocalTime.parse(s.search_time.toUpperCase(), timeFormatter)));
+
                             noSearchResults.setVisibility(View.GONE);
                             recyclerView.setAdapter(new SearchAdapter(getActivity().getApplicationContext(), searchItems));
                             recyclerView.setVisibility(View.VISIBLE);
@@ -236,7 +234,6 @@ public class SearchResultsFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ERROR --- getCardData() --->", error.toString());
                 error.printStackTrace();
             }
         });

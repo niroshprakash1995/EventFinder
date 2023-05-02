@@ -13,4 +13,5 @@
     <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
         <item name="android:textSize">12sp</item>
     </style>
+
 </resources>

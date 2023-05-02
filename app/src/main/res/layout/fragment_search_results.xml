@@ -38,7 +38,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/search_result_recyclerview"/>
+        android:id="@+id/search_result_recyclerview"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@color/lightGreen"/>
 
     <TextView
         android:id="@+id/no_search_results"

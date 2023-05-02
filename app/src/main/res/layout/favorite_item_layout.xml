@@ -11,6 +11,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:visibility="visible"
         app:cardBackgroundColor="#040404"
         app:cardCornerRadius="12dp"
@@ -24,16 +25,17 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:src="@drawable/test_img"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/rounded_background"
             android:clipToOutline="true"/>
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="33dp"
             android:id="@+id/search_name1"
-            android:layout_marginLeft="115dp"
+            android:layout_marginLeft="120dp"
             android:textColor="@color/text_color"
             android:text="Test"
             android:gravity="center_vertical"
@@ -46,10 +48,10 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:layout_width="150dp"
+            android:layout_width="145dp"
             android:layout_height="33dp"
             android:id="@+id/search_venue1"
-            android:layout_marginLeft="115dp"
+            android:layout_marginLeft="120dp"
             android:textColor="@color/text_color"
             android:text="Test"
             android:layout_marginTop="33dp"
@@ -62,10 +64,10 @@
             android:marqueeRepeatLimit ="marquee_forever"/>
 
         <TextView
-            android:layout_width="150dp"
+            android:layout_width="145dp"
             android:layout_height="33dp"
             android:id="@+id/search_category1"
-            android:layout_marginLeft="115dp"
+            android:layout_marginLeft="120dp"
             android:textColor="@color/text_color"
             android:text="Test"
             android:layout_marginTop="66dp"

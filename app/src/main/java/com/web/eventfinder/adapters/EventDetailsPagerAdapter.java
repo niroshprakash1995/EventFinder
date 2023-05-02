@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.web.eventfinder.R;
 import com.web.eventfinder.eventdetails.ArtistItem;
 import com.web.eventfinder.eventdetails.ArtistsFragment;
 import com.web.eventfinder.eventdetails.DetailsFragment;
@@ -59,7 +61,6 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Log.d("Adapter", "Creating fragment at position: " + position);
         switch(position){
             case 0:
                 DetailsFragment detailsFragment = new DetailsFragment(detailsItem);
@@ -87,6 +88,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
         String genres = "";
         String priceRange = "";
         String ticketStatus = "";
+        String ticketStatusColor = "";
         String buyTicketLink = "";
         String seatMapLink = "";
 
@@ -122,7 +124,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                         if (dates.has("localDate")) {
                             date = dates.get("localDate").getAsString();
                             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                            SimpleDateFormat outputFormat = new SimpleDateFormat("MMMM d, yyyy");
+                            SimpleDateFormat outputFormat = new SimpleDateFormat("MMM d, yyyy");
 
                             try {
                                 Date d = inputFormat.parse(date);
@@ -148,6 +150,32 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                     if(!statusObj.isJsonNull()){
                         if(statusObj.has("code")){
                             ticketStatus = statusObj.get("code").getAsString();
+                            switch (ticketStatus) {
+                                case "onsale":
+                                    ticketStatusColor = "green";
+                                    ticketStatus = "On Sale";
+                                    break;
+                                case "offsale":
+                                    ticketStatusColor = "red";
+                                    ticketStatus = "Off Sale";
+                                    break;
+                                case "canceled":
+                                case "cancelled":
+                                    ticketStatusColor = "black";
+                                    ticketStatus = "Canceled";
+                                    break;
+                                case "postponed":
+                                    ticketStatusColor = "orange";
+                                    ticketStatus = "Postponed";
+                                    break;
+                                case "rescheduled":
+                                    ticketStatusColor = "orange";
+                                    ticketStatus = "Rescheduled";
+                                    break;
+                                default:
+                                    ticketStatusColor = "";
+                                    ticketStatus = "";
+                            }
                         }
                     }
                 }
@@ -179,7 +207,6 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                         }
 
                         if(classification.has("type") && classification.get("type").getAsJsonObject().get("name").toString() != "" && !classification.get("type").getAsJsonObject().get("name").getAsString().toLowerCase().equals("undefined")){
-                            Log.d("xx", classification.get("type").getAsJsonObject().get("name").toString().toLowerCase());
                             if(genres != ""){
                                 genres = genres + " | " + classification.get("type").getAsJsonObject().get("name").toString();
                             }
@@ -196,6 +223,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                                 genres = classification.get("subType").getAsJsonObject().get("name").toString();
                             }
                         }
+                        genres = genres.replaceAll("\"", "");
                     }
                 }
 
@@ -214,7 +242,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                                 priceRange = pRanges.get(0).getAsJsonObject().get("max").getAsString();
                             }
                         }
-                        priceRange = priceRange + " USD";
+                        priceRange = priceRange + " (USD)";
                     }
                 }
 
@@ -232,7 +260,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                     }
                 }
             }
-            detailsItem = new DetailsItem(artistNames, venueName, date, time, genres, priceRange, ticketStatus, buyTicketLink, seatMapLink);
+            detailsItem = new DetailsItem(artistNames, venueName, date, time, genres, priceRange, ticketStatus, ticketStatusColor, buyTicketLink, seatMapLink);
         }
     }
 
@@ -414,7 +442,6 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
                     }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ERROR --- getLatLong() --->", error.toString());
                 error.printStackTrace();
             }
         });

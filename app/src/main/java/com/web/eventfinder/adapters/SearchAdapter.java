@@ -1,4 +1,4 @@
-package com.web.eventfinder;
+package com.web.eventfinder.adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +13,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+import com.web.eventfinder.R;
+import com.web.eventfinder.SearchItem;
+import com.web.eventfinder.SearchViewHolder;
 
 import org.json.JSONArray;
 import org.json.JSONException;

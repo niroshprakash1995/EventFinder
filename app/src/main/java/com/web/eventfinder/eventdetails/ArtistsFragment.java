@@ -1,9 +1,6 @@
 package com.web.eventfinder.eventdetails;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,17 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.TextView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.web.eventfinder.R;
-import com.web.eventfinder.SearchAdapter;
 import com.web.eventfinder.adapters.ArtistItemAdapter;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

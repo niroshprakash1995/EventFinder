@@ -1,5 +1,4 @@
 package com.web.eventfinder.adapters;
-//Used ChatGPT
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;

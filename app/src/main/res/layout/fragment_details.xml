@@ -32,11 +32,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Artist/Teams"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/artistTeamsValue"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:layout_marginLeft="25dp"
@@ -58,11 +59,12 @@
                 android:text="Venue"
                 android:textColor="@color/white"
                 android:layout_below="@+id/artistTeamsTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/venueValue"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:layout_marginLeft="25dp"
@@ -86,11 +88,12 @@
                 android:text="Date"
                 android:textColor="@color/white"
                 android:layout_below="@+id/venueTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/dateValue"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:layout_marginLeft="25dp"
@@ -116,11 +119,12 @@
                 android:text="Time"
                 android:textColor="@color/white"
                 android:layout_below="@+id/dateTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/timeValue"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:layout_marginLeft="25dp"
@@ -146,11 +150,12 @@
                 android:text="Genres"
                 android:textColor="@color/white"
                 android:layout_below="@+id/timeTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/genresValue"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:layout_marginLeft="25dp"
@@ -174,11 +179,12 @@
                 android:text="Price Range"
                 android:textColor="@color/white"
                 android:layout_below="@+id/genresTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/priceRangeValue"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:layout_marginLeft="25dp"
@@ -203,15 +209,15 @@
                 android:text="Ticket Status"
                 android:textColor="@color/white"
                 android:layout_below="@+id/priceRangeTitle"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/ticketStatusValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/priceRangeTitle"
-                android:layout_marginStart="120dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="95dp"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:background="@drawable/rounded_background"
@@ -230,11 +236,12 @@
                 android:textColor="@color/white"
                 android:layout_below="@+id/ticketStatusTitle"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/buyTicketsAtValue"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/artistTeamsTitle"
                 android:layout_marginLeft="25dp"
@@ -245,7 +252,7 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:text="https://www.google.com/search?q=how+to+show+loader+betwen+active+and+fragment"
+                android:text="Test Test"
                 android:textColor="@color/green"
                 android:layout_below="@+id/ticketStatusTitle"
                 android:layout_marginTop="20dp"
@@ -259,7 +266,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

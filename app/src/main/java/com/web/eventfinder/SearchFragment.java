@@ -273,7 +273,6 @@ public class SearchFragment extends Fragment {
                     new Response.Listener < String > () {
                         @Override
                         public void onResponse(String response) {
-                            Log.d("SearchFragment", "onResponse: " + response);
                             try {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 JSONArray keywordArray = jsonResponse.getJSONArray("keywords");
@@ -309,20 +308,16 @@ public class SearchFragment extends Fragment {
                             String[] loc;
                             try {
                                 loc = response.getString("loc").split(",");
-                                Log.d("latitude", loc[0].toString());
-                                Log.d("longitude", loc[1].toString());
                                 latitude = Double.parseDouble(loc[0]);
                                 longitude = Double.parseDouble(loc[1]);
 
                             } catch (JSONException e) {
-                                Log.d("IP LOG", "Got error");
                                 e.printStackTrace();
                             }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("getLatAndLon - ERROR OCCURRED --->", error.toString());
             }
         });
         queue.add(jsonObjectRequest);
@@ -332,7 +327,6 @@ public class SearchFragment extends Fragment {
         if (locationSwitch.isChecked()) {
             GeoHash geoHash = GeoHash.withCharacterPrecision(latitude, longitude, 7);
             geohash = geoHash.toBase32();
-            Log.d("Geohash ---> ", geohash);
             callback.onSuccess(geohash);
 
         } else {
@@ -371,18 +365,14 @@ public class SearchFragment extends Fragment {
                                 GeoHash geoHash = GeoHash.withCharacterPrecision(latitude, longitude, 7);
                                 geohash = geoHash.toBase32();
                                 callback.onSuccess(geohash);
-                                Log.d("GEOHASH --->", geohash);
                             } else {
-                                Log.d("GEOHASH - STATUS ERROR --->", status);
                             }
                         } catch (JSONException e) {
-                            Log.d("GEOHASH - JSON ERROR --->", e.toString());
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("GEOHASH - ERROR OCCURRED --->", error.toString());
             }
         });
         queue.add(stringRequest);
