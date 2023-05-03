@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -132,9 +133,11 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
         if(searchIds.contains(eventId)){
             heartIcon.setImageResource(R.drawable.fav_filled);
+            heartIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
         }
         else{
             heartIcon.setImageResource(R.drawable.fav);
+            heartIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
         }
 
         heartIcon.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +171,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 if(eventWasInFavorites){
                     //Change icon to empty heart
                     heartIcon.setImageResource(R.drawable.fav);
+                    heartIcon.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.white), PorterDuff.Mode.SRC_IN);
                     Snackbar snackbar = Snackbar.make(v, toolbarTitle.getText() + " removed from favorites", Snackbar.LENGTH_SHORT);
                     View snackBarView= snackbar.getView();
                     snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.snackBar_grey)));
@@ -179,6 +183,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 else{
                     jsonArray.put(jsonObjVal);
                     heartIcon.setImageResource(R.drawable.fav_filled);
+                    heartIcon.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.white), PorterDuff.Mode.SRC_IN);
                     Snackbar snackbar = Snackbar.make(v, toolbarTitle.getText() + " added to favorites", Snackbar.LENGTH_SHORT);
                     View snackBarView= snackbar.getView();
                     snackBarView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.snackBar_grey)));
@@ -261,7 +266,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                         //Set facebook link
                         facebookLink = "https://facebook.com/sharer/sharer.php?u=" + url;
                         //Set twitter link
-                        twitterLink = "https://twitter.com/share?url=" + url + "&text=Check " + name + "on Ticketmaster.%0A";
+                        twitterLink = "https://twitter.com/share?url=" + url + "&text=Check " + name + " on Ticketmaster.%0A";
                         toolbarTitle.setText(name);
 
                     }

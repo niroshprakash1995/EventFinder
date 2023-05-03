@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/search_name"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="33dp"
             android:layout_marginLeft="120dp"
             android:ellipsize="marquee"

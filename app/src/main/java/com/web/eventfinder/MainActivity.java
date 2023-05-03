@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
                 String eventId = (String) favoriteIcon.getTag();
                 if(searchIds.contains(eventId)){
                     favoriteIcon.setImageResource(R.drawable.fav_filled);
+                    favoriteIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
                 }
                 else{
                     favoriteIcon.setImageResource(R.drawable.fav);
+                    favoriteIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
                 }
             }
 
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 String eventId = (String) favoriteIcon.getTag();
                 if(searchIds.contains(eventId)){
                    favoriteIcon.setImageResource(R.drawable.fav_filled);
+                    favoriteIcon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
                 }
                 else{
                     FavoritesAdapter adapter = (FavoritesAdapter) ((RecyclerView) rv.getParent()).getAdapter();

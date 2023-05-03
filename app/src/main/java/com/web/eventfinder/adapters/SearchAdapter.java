@@ -42,7 +42,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder searchHolder, int position) {
 
-        //String image_url = searchItems.get(position).getSearch_image();
         Picasso.get().load(searchItems.get(position).getSearch_image()).fit().into(searchHolder.search_image);
         SearchItem item = searchItems.get(position);
 
