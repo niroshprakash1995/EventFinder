@@ -307,7 +307,7 @@ public class EventDetailsPagerAdapter extends FragmentPagerAdapter {
             suffix = "M";
             value = number / 1000000.0;
         }
-        return String.format("%.1f%s", value, suffix);
+        return String.format("%.0f%s", value, suffix);
     }
 
     public void parseVenueData(){
